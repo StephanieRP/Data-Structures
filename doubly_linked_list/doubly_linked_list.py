@@ -96,7 +96,19 @@ class DoublyLinkedList:
         self.head = node
 
     def move_to_end(self, node):
-        pass
+      # checks if only one item remains in the list
+        if self.head is self.tail:
+            return
+
+        if node.prev is not None:
+            node.prev.next = node.next
+        if node.next is not None:
+            node.next.prev = node.prev
+
+        self.tail.next = node
+        node.prev = self.tail  # set the current tail to be the node's prev
+        node.next = None
+        self.tail = node
 
     def delete(self, node):
         if self.head == self.tail:
