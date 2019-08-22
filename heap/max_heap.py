@@ -22,17 +22,12 @@ class Heap:
         return len(self.storage)
 
     def _bubble_up(self, index):
-        if index == 1 or index == 2:
-            parentIndex = 0
-        else:
-            parentIndex = math.floor((index-1)/2)
-        parent = self.storage[parentIndex]
-        child = self.storage[index]
-        if child > parent:
-            self.storage[index] = parent
-            self.storage[parentIndex] = child
-            if(parentIndex != 0):
-                self._bubble_up(parentIndex)
+        if index == 0:
+            return
+        while (self.storage[index] > self.storage[(index-1) // 2] and index > 0):
+            self.storage[index], self.storage[(
+                index-1) // 2] = self.storage[(index-1) // 2], self.storage[index]
+            index = (index-1) // 2
 
     def _sift_down(self, index):
         children = []
